@@ -70,3 +70,14 @@ Verify CPU Processor Status Via Redfish GET
     Dictionary Should Contain Key    ${response.dict}    TDPWatts
     Dictionary Should Contain Key    ${response.dict}    TotalCores
     Dictionary Should Contain Key    ${response.dict}    TotalThreads
+
+Verify CPU Processor Collection Status
+    [Documentation]    Verify CPU Processor Collection Status through Redfish.
+    [Tags]    CPU-04    RO
+    ${response}=    Redfish.Get    /redfish/v1/Systems/1/Processors    valid_status_codes=[200]
+    Dictionary Should Contain Key    ${response.dict}    @odata.context
+    Dictionary Should Contain Key    ${response.dict}    @odata.id
+    Dictionary Should Contain Key    ${response.dict}    @odata.type
+    Dictionary Should Contain Key    ${response.dict}    Members
+    Dictionary Should Contain Key    ${response.dict}    Members@odata.count
+    Dictionary Should Contain Key    ${response.dict}    Name

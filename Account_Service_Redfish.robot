@@ -45,3 +45,19 @@ Verify Account Login Status
     Dictionary Should Contain Key    ${response.dict}    Members
     Dictionary Should Contain Key    ${response.dict}    Members@odata.count
     Dictionary Should Contain Key    ${response.dict}    Name
+
+Verify Redfish Account Service Properties
+    [Documentation]    Verify Redfish Account Service Properties through Redfish.
+    [Tags]    Account-Service-14    RO
+    ${response}=    Redfish.Get    /redfish/v1/AccountService    valid_status_codes=[200]
+    Dictionary Should Contain Key    ${response.dict}    @odata.id
+    Dictionary Should Contain Key    ${response.dict}    @odata.type
+    Dictionary Should Contain Key    ${response.dict}    AccountLockoutDuration
+    Dictionary Should Contain Key    ${response.dict}    AccountLockoutThreshold
+    Dictionary Should Contain Key    ${response.dict}    Description
+    Dictionary Should Contain Key    ${response.dict}    Id
+    Dictionary Should Contain Key    ${response.dict}    MaxPasswordLength
+    Dictionary Should Contain Key    ${response.dict}    MinPasswordLength
+    Dictionary Should Contain Key    ${response.dict}    Name
+    Dictionary Should Contain Key    ${response.dict}    PasswordExpirationDays
+    Dictionary Should Contain Key    ${response.dict}    ServiceEnabled

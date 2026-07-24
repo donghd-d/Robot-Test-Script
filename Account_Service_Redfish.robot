@@ -13,3 +13,9 @@ Create Redfish User Account And Verify Login
     Dictionary Should Contain Key    ${response.dict}    UserName
     Dictionary Should Contain Key    ${response.dict}    RoleId
     Dictionary Should Contain Key    ${response.dict}    Enabled
+
+Create Redfish User Account And Verify In Collection
+    [Documentation]    Create Redfish User Account And Verify In Collection through Redfish.
+    [Tags]    Account-Service-11    RW
+    ${response}=    Redfish.Post    /redfish/v1/AccountService/Accounts    body={"UserName": "testuser01", "Password": "${OPENBMC_PASSWORD}", "RoleId": "priv-user", "Enabled": true}    valid_status_codes=[201]
+    Dictionary Should Contain Key    ${response.dict}    @odata.id

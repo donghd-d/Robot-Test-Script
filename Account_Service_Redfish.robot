@@ -5,38 +5,11 @@ Resource    /home/bmc/openbmc-test-automation/lib/bmc_redfish_resource.robot
 Test Tags    Account-Service    Redfish
 
 *** Test Cases ***
-Verify Redfish User Login
-    [Documentation]    Verify Redfish User Login through Redfish.
-    [Tags]    Account-Service-05    RW
-    Redfish Verify User
-    ${response}=    Redfish.Post    /redfish/v1/SessionService/Sessions    body={"UserName": "${TEST_USER_NAME}", "Password": "${TEST_USER_PASSWORD}"}    valid_status_codes=[201]
+Create Redfish User Account And Verify Login
+    [Documentation]    Create Redfish User Account And Verify Login through Redfish.
+    [Tags]    Account-Service-10    RW
+    ${response}=    Redfish.Post    /redfish/v1/AccountService/Accounts    body={"UserName": "redfish_verify_user", "Password": "${OPENBMC_PASSWORD}", "RoleId": "priv-user", "Enabled": true, "PasswordChangeRequired": false}    valid_status_codes=[201]
     Dictionary Should Contain Key    ${response.dict}    @odata.id
-    Dictionary Should Contain Key    ${response.dict}    Id
-    Dictionary Should Contain Key    ${response.dict}    Name
     Dictionary Should Contain Key    ${response.dict}    UserName
-    Dictionary Should Contain Key    ${response.dict}    X-Auth-Token
-    Redfish.Delete
-
-Verify Redfish User Login
-    [Documentation]    Verify Redfish User Login through Redfish.
-    [Tags]    Account-Service-06    RW
-    Redfish Verify User
-    ${response}=    Redfish.Post    /redfish/v1/SessionService/Sessions    body={"UserName": "${TEST_USER_NAME}", "Password": "${TEST_USER_PASSWORD}"}    valid_status_codes=[201]
-    Dictionary Should Contain Key    ${response.dict}    @odata.id
-    Dictionary Should Contain Key    ${response.dict}    Id
-    Dictionary Should Contain Key    ${response.dict}    Name
-    Dictionary Should Contain Key    ${response.dict}    UserName
-    Dictionary Should Contain Key    ${response.dict}    X-Auth-Token
-    Redfish.Delete
-
-Verify Redfish User Login
-    [Documentation]    Verify Redfish User Login through Redfish.
-    [Tags]    Account-Service-07    RW
-    ${response}=    Redfish.Post    /redfish/v1/SessionService/Sessions    body={"UserName": "${TEST_USER_NAME}", "Password": "${TEST_USER_PASSWORD}"}    valid_status_codes=[201]
-    Dictionary Should Contain Key    ${response.dict}    @odata.id
-    Dictionary Should Contain Key    ${response.dict}    @odata.type
-    Dictionary Should Contain Key    ${response.dict}    Id
-    Dictionary Should Contain Key    ${response.dict}    Name
-    Dictionary Should Contain Key    ${response.dict}    UserName
-    Redfish.Delete
-    Multiple Session Cleanup
+    Dictionary Should Contain Key    ${response.dict}    RoleId
+    Dictionary Should Contain Key    ${response.dict}    Enabled

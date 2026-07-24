@@ -26,3 +26,25 @@ Get Single CPU Details
     ${response}=    GET On Session    redfish    /redfish/v1/Systems/1/Processors/0
     Should Be Equal As Integers    ${response.status_code}    200
     Log    ${response.text}
+
+Verify CPU Processors Collection Status
+    [Documentation]    Verify CPU Processors Collection Status through Redfish.
+    [Tags]    CPU-01    RO
+    ${response}=    Redfish.Get    /redfish/v1/Systems/1/Processors    valid_status_codes=[200]
+    Dictionary Should Contain Key    ${response.dict}    @odata.context
+    Dictionary Should Contain Key    ${response.dict}    @odata.id
+    Dictionary Should Contain Key    ${response.dict}    @odata.type
+    Dictionary Should Contain Key    ${response.dict}    Members
+    Dictionary Should Contain Key    ${response.dict}    Members@odata.count
+    Dictionary Should Contain Key    ${response.dict}    Name
+
+Verify CPU Processor Collection Status Via Redfish
+    [Documentation]    Verify CPU Processor Collection Status Via Redfish through Redfish.
+    [Tags]    CPU-02    RO
+    ${response}=    Redfish.Get    /redfish/v1/Systems/1/Processors    valid_status_codes=[200]
+    Dictionary Should Contain Key    ${response.dict}    @odata.context
+    Dictionary Should Contain Key    ${response.dict}    @odata.id
+    Dictionary Should Contain Key    ${response.dict}    @odata.type
+    Dictionary Should Contain Key    ${response.dict}    Members
+    Dictionary Should Contain Key    ${response.dict}    Members@odata.count
+    Dictionary Should Contain Key    ${response.dict}    Name

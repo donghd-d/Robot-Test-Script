@@ -6,7 +6,7 @@ Test Tags    Account-Service    Redfish
 
 *** Test Cases ***
 Verify Redfish User Login And Logout
-    [Documentation]    Verify Redfish User Login And Logout through Redfish.
+    [Documentation]    Verify Redfish User Login through Redfish.
     [Tags]    Account-Service-09    RW
     ${response}=    Redfish.Post    /redfish/v1/SessionService/Sessions    body={"UserName": "${OPENBMC_USERNAME}", "Password": "${OPENBMC_PASSWORD}"}    valid_status_codes=[201]
     Dictionary Should Contain Key    ${response.dict}    Id

@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation    Generated Redfish tests for Sensor.
 Resource    /home/bmc/openbmc-test-automation/lib/resource.robot
-Resource    /home/bmc/openbmc-test-automation/lib/bmc_redfish_resource.robot
-Suite Setup    Redfish.Login
+Library    /home/bmc/openbmc-test-automation/lib/bmc_redfish.py    https://${OPENBMC_HOST}:${HTTPS_PORT}    ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}    AS    Redfish
+Suite Setup    Redfish.Login    auth=basic
 Suite Teardown    Redfish.Logout
 Test Tags    Sensor    Redfish
 
@@ -14,6 +14,7 @@ Get Sensor Collection And Verify NonEmpty
     Dictionary Should Contain Key    ${response.dict}    Members
     Dictionary Should Contain Key    ${response.dict}    Members@odata.count
     Dictionary Should Contain Key    ${response.dict}    @odata.id
+    Should Be True    len(${response.dict}[Members]) > 0
 
 Get Bmc Ecc Sensor And Verify Status
     [Documentation]    Get Bmc Ecc Sensor And Verify Status through Redfish.

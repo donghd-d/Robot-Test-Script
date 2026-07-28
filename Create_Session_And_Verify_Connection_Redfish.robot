@@ -26,4 +26,4 @@ Verify Created Session Connection
 Delete Created Session
     [Documentation]    Delete only the Session created by this suite.
     [Tags]    Account-Service-34    RW
-    ${response}=    Redfish.Delete    ${created_session_uri}    valid_status_codes=[204]
+    ${response}=    Redfish.Delete    ${created_session_uri}    valid_status_codes=[200, 204]

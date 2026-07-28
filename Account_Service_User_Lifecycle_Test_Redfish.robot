@@ -9,8 +9,8 @@ Get Account Collection
     [Documentation]    Get Account Collection through Redfish.
     [Tags]    Account-Service-17    RO
     ${response}=    Redfish.Get    /redfish/v1/AccountService/Accounts    valid_status_codes=[200]
-    Should Be True    len(${response.dict}["Members"]) > 0
-    Should Contain    ${response.dict}["@odata.type"]    AccountCollection
+    Should Be True    len(${response.dict}[Members]) > 0
+    Should Contain    ${response.dict}[@odata.type]    AccountCollection
     Dictionary Should Contain Key    ${response.dict}    @odata.id
 
 Create User With PrivUser Role
@@ -25,9 +25,9 @@ Verify Created User Detail By GET
     [Documentation]    Verify Created User Detail By GET through Redfish.
     [Tags]    Account-Service-19    RO
     ${response}=    Redfish.Get    ${created_account_uri}    valid_status_codes=[200]
-    Should Be Equal    ${response.dict}["UserName"]    testuser
-    Should Be Equal    ${response.dict}["RoleId"]    priv-user
-    Should Be Equal    ${response.dict}["Enabled"]    ${True}
+    Should Be Equal    ${response.dict}[UserName]    testuser
+    Should Be Equal    ${response.dict}[RoleId]    priv-user
+    Should Be Equal    ${response.dict}[Enabled]    ${True}
     Dictionary Should Contain Key    ${response.dict}    Id
 
 Modify User Role Via PATCH
@@ -40,7 +40,7 @@ Verify Modified User Role By GET
     [Documentation]    Verify Modified User Role By GET through Redfish.
     [Tags]    Account-Service-21    RO
     ${response}=    Redfish.Get    ${created_account_uri}    valid_status_codes=[200]
-    Should Be Equal    ${response.dict}["RoleId"]    priv-admin
+    Should Be Equal    ${response.dict}[RoleId]    priv-admin
     Dictionary Should Contain Key    ${response.dict}    Id
 
 Delete Created User For Cleanup

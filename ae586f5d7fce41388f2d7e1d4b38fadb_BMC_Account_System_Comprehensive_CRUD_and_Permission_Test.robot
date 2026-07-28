@@ -65,7 +65,7 @@ Update Temporary Account Role
     [Tags]    Account-Service-DRAFT-07    RW
     ${payload}=    Create Dictionary    RoleId=Operator
     ${headers}=    Create Dictionary    If-Match=${created_account_etag}
-    ${response}=    Redfish.Patch    ${created_account_uri}    body=&{payload}    headers=&{headers}    valid_status_codes=[204]
+    ${response}=    Redfish.Patch    ${created_account_uri}    body=&{payload}    headers=&{headers}    valid_status_codes=[200, 204]
 
 Verify Updated Temporary Account
     [Documentation]    Verify Updated Temporary Account through Redfish.

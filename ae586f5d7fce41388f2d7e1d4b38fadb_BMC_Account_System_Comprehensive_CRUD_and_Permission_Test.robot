@@ -2,7 +2,7 @@
 Documentation    Generated Redfish tests for Account-Service.
 Resource    /home/bmc/openbmc-test-automation/lib/resource.robot
 Resource    /home/bmc/openbmc-test-automation/lib/bmc_redfish_resource.robot
-Suite Setup    Redfish.Login
+Suite Setup    Redfish.Login    auth=basic
 Suite Teardown    Redfish.Logout
 Test Tags    Account-Service    Redfish
 

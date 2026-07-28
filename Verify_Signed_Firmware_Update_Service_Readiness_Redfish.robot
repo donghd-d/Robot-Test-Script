@@ -1,10 +1,10 @@
 *** Settings ***
-Documentation    Generated Redfish tests for Date-Time.
+Documentation    Generated Redfish tests for Firmware.
 Resource    /home/bmc/openbmc-test-automation/lib/resource.robot
-Resource    /home/bmc/openbmc-test-automation/lib/bmc_redfish_resource.robot
-Suite Setup    Redfish.Login
+Library    /home/bmc/openbmc-test-automation/lib/bmc_redfish.py    https://${OPENBMC_HOST}:${HTTPS_PORT}    ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}    AS    Redfish
+Suite Setup    Redfish.Login    auth=basic
 Suite Teardown    Redfish.Logout
-Test Tags    Date-Time    Redfish
+Test Tags    Firmware    Redfish
 
 *** Test Cases ***
 VerifySignedFirmwareUpdateServiceReadiness

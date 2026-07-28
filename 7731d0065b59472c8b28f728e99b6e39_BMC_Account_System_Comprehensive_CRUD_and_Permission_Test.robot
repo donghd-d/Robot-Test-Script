@@ -42,9 +42,11 @@ Create Random Temporary Account
     ${created_account_uri_username_suffix}=    Generate Random String    8    [LOWER][NUMBERS]
     ${created_account_uri_username}=    Set Variable    robot-lifecy-${created_account_uri_username_suffix}
     Set Suite Variable    ${created_account_uri_username}
-    ${payload}=    Create Dictionary    UserName=${created_account_uri_username}    Password=${OPENBMC_PASSWORD}    RoleId=priv-user    Enabled=${True}
+    ${created_account_password}=    Evaluate    ''.join(random.sample('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789', 16)) + 'Aa1!'    modules=random
+    Set Suite Variable    ${created_account_password}
+    ${payload}=    Create Dictionary    UserName=${created_account_uri_username}    Password=${created_account_password}    RoleId=priv-user    Enabled=${True}
     ${response}=    Redfish.Post    /redfish/v1/AccountService/Accounts    body=&{payload}    valid_status_codes=[201]
-    ${created_account_uri}=    Set Variable    ${response.headers}[Location]
+    ${created_account_uri}=    Set Variable    ${response.session_location}
     Set Suite Variable    ${created_account_uri}
 
 Verify Created Temporary Account

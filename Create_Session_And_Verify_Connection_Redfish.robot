@@ -12,7 +12,7 @@ Create Session And Verify Connection
     [Tags]    Account-Service-32    RW
     ${payload}=    Create Dictionary    UserName=${OPENBMC_USERNAME}    Password=${OPENBMC_PASSWORD}
     ${response}=    Redfish.Post    /redfish/v1/SessionService/Sessions    body=&{payload}    valid_status_codes=[201]
-    ${created_session_uri}=    Set Variable    ${response.headers}[Location]
+    ${created_session_uri}=    Set Variable    ${response.session_location}
     Set Suite Variable    ${created_session_uri}
 
 Verify Created Session Resource
